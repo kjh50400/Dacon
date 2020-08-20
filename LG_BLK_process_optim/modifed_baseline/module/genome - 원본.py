@@ -251,45 +251,37 @@ class Genome():
 
             self.submission.loc[s, 'Event_A'] = out1
             if self.submission.loc[s, 'Event_A'] == 'PROCESS':
-                # self.submission.loc[s, 'MOL_A'] = out2
-                if s < 24*14: # 15일 전 조건 이렇게 쓰던가 아니면 아래 23일간 코드 고쳐 쓰던가
-                    self.submission.loc[s, 'MOL_A'] = 0
-                elif 24*14 <= s <24*23:
-                    if self.process_mode_A == 1:
-                        self.submission.loc[s, 'MOL_A'] = out2 * (140.5907407/24)
-                    else:
-                        self.submission.loc[s, 'MOL_A'] = 0
-                elif 24*23 <= s < 24*30:
-                    self.submission.loc[s, 'MOL_A'] = out2 * (140.5907407/24)
-                elif 24*30 <= s < 24*61:
-                    self.submission.loc[s, 'MOL_A'] = out2 * (140.8055556/24)
-                else:
-                    self.submission.loc[s, 'MOL_A'] = out2 * (141.0185185/24)
+                # 아래 코드 사용 시, 위 foward에 out2 수정 요
+                # if s < 24*15: 15일 전 조건 이렇게 쓰던가 아니면 아래 23일간 코드 고쳐 쓰던가
+                #     self.submission.loc[s, 'MOL_A'] = 0
+                # elif 24*15 <= s < 24*30:
+                #     self.submission.loc[s, 'MOL_A'] = out2 * (140.5907407/24)
+                # elif 24*30 <= s < 24*61:
+                #     self.submission.loc[s, 'MOL_A'] = out2 * (140.8055556/24)
+                # else:
+                #     self.submission.loc[s, 'MOL_A'] = out2 * (141.0185185/24)
+                self.submission.loc[s, 'MOL_A'] = out2
             else:
                 self.submission.loc[s, 'MOL_A'] = 0
 
             self.submission.loc[s, 'Event_B'] = out3
             if self.submission.loc[s, 'Event_B'] == 'PROCESS':
-                # self.submission.loc[s, 'MOL_B'] = out4
-                if s < 24*14:
-                    self.submission.loc[s, 'MOL_B'] = 0
-                elif 24*14 <= s <24*23:
-                    if self.process_mode_B == 1:
-                        self.submission.loc[s, 'MOL_B'] = out4 * (140.5907407/24)
-                    else:
-                        self.submission.loc[s, 'MOL_B'] = 0
-                elif 24*23 <= s < 24*30:
-                    self.submission.loc[s, 'MOL_B'] = out4 * (140.5907407/24)
-                elif 24*30 <= s < 24*61:
-                    self.submission.loc[s, 'MOL_B'] = out4 * (140.8055556/24)
-                else:
-                    self.submission.loc[s, 'MOL_B'] = out4 * (141.0185185/24)
+                # 아래 코드 사용 시, 위 foward에 out2 수정 요
+                # if s < 24*15:
+                #     self.submission.loc[s, 'MOL_B'] = 0
+                # elif 24*15 <= s < 24*30:
+                #     self.submission.loc[s, 'MOL_B'] = out2 * (140.5907407/24)
+                # elif 24*30 <= s < 24*61:
+                #     self.submission.loc[s, 'MOL_B'] = out2 * (140.8055556/24)
+                # else:
+                #     self.submission.loc[s, 'MOL_B'] = out2 * (141.0185185/24)
+                self.submission.loc[s, 'MOL_B'] = out4
             else:
                 self.submission.loc[s, 'MOL_B'] = 0
                 
         # 23일간 MOL = 0
-        # self.submission.loc[:24*23, 'MOL_A'] = 0
-        # self.submission.loc[:24*23, 'MOL_B'] = 0
+        self.submission.loc[:24*23, 'MOL_A'] = 0
+        self.submission.loc[:24*23, 'MOL_B'] = 0
         
         # A 라인 = B 라인
         # self.submission.loc[:, 'Event_B'] = self.submission.loc[:, 'Event_A']
